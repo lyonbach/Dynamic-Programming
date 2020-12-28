@@ -13,7 +13,7 @@ def grid_traveller(m, n,):
     return grid_traveller(m - 1, n) + grid_traveller(m, n - 1)
 
 
-def grid_traveller_memo(m: int, n: int, memo: dict={}):
+def mem_grid_traveller(m: int, n: int, memo: dict={}):
 
     value = memo.get((m, n))
     if not value:
@@ -22,7 +22,7 @@ def grid_traveller_memo(m: int, n: int, memo: dict={}):
         elif m == 0 or n == 0:
             value = 0
         else:
-            value = grid_traveller_memo(m - 1, n, memo) + grid_traveller_memo(m, n - 1, memo)
+            value = mem_grid_traveller(m - 1, n, memo) + mem_grid_traveller(m, n - 1, memo)
         memo[(m, n)] = value
 
     return value
