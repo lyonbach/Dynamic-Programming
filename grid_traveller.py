@@ -4,7 +4,12 @@ Original videos can be viewed from the following link:
 https://www.youtube.com/watch?v=oBt53YbR9Kk
 """
 
-def grid_traveller(m, n,):
+def grid_traveller(m: int, n: int):
+
+    """
+    Returns the number of ways as int within the given grid size.
+    Assumes that initial location is 0, 0 (top left).
+    """
 
     if m == 1 and n == 1:
         return 1
@@ -14,6 +19,11 @@ def grid_traveller(m, n,):
 
 
 def mem_grid_traveller(m: int, n: int, memo: dict={}):
+
+    """
+    Returns the number of ways as int within the given grid size.
+    Assumes that initial location is 0, 0 (top left).
+    """
 
     value = memo.get((m, n))
     if not value:
