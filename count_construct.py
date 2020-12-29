@@ -1,9 +1,10 @@
 """
-Python implementation of the code for the seventh chapter.
+Python implementation of the seventh and the fifteenth chapters' code.
 Original videos can be viewed from the following link:
 https://www.youtube.com/watch?v=oBt53YbR9Kk
 """
 
+# Seventh Chapter
 def count_construct(target: str, word_bank: list):
 
     """
@@ -46,3 +47,26 @@ def mem_count_construct(target: str, word_bank: list, memo={}):
 
     memo[target] = total_count
     return total_count
+
+
+def tab_count_construct(target: str, word_bank: list):
+
+    """
+    Returns number of ways that target string can be constructed using strings from the word_bank.
+    Returns int.
+    """
+
+    table = [0 for _ in range(len(target) + 1)]
+    table[0] = 1
+    
+    for idx in range(len(table)):
+        suffix = target[idx:]
+        for prefix in word_bank:
+            target_idx = idx + len(prefix)
+            if target_idx >= len(table):
+                continue
+            if not suffix.startswith(prefix):
+                continue
+            table[target_idx] = table[target_idx] + table[idx]
+
+    return table[-1]
