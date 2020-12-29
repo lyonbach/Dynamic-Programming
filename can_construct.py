@@ -1,9 +1,10 @@
 """
-Python implementation of the code for the sixth chapter.
+Python implementation of the sixth and the fourteenth chapters code.
 Original videos can be viewed from the following link:
 https://www.youtube.com/watch?v=oBt53YbR9Kk
 """
 
+# Sixth Chapter
 def can_construct(target: str, word_bank: list):
 
     """
@@ -46,3 +47,27 @@ def mem_can_construct(target: str, word_bank: list, memo={}):
                 return True
 
     return False
+
+
+# Fourteenth Chapter
+def tab_can_construct(target: str, word_bank: list):
+
+    """
+    Returns if target string can be constructed from the given words.
+    Returns bool.
+    """
+
+    table = [False for _ in range(len(target) + 1)]
+    table[0] = True
+
+    for idx in range(len(target)):
+        if table[idx] is True:
+            suffix = target[idx:]
+            for prefix in word_bank:
+                if idx + len(prefix) >= len(table):
+                    continue
+                if not suffix.startswith(prefix):
+                    continue
+                table[idx + len(prefix)] = True
+
+    return table[-1]
