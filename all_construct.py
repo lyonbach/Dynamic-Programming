@@ -1,9 +1,10 @@
 """
-Python implementation of the code for the eighth chapter.
+Python implementation of the eighth and the sixteenth chapters' code.
 Original videos can be viewed from the following link:
 https://www.youtube.com/watch?v=oBt53YbR9Kk
 """
 
+# Eighth Chapter
 def all_construct(target: str, word_bank: list):
 
     """
@@ -47,3 +48,29 @@ def mem_all_construct(target: str, word_bank: list, memo={}):
             memo[target] = result
 
     return result
+
+
+# Sixteenth Chapter
+def tab_all_construct(target: str, word_bank: list):
+
+    """
+    Returns a list of lists of that consist a combination of which that the target string can be constructed using strings from the word_bank.
+    """
+    
+    table = [[] for _ in range(len(target) + 1)]
+    table[0].append([])
+
+    for idx in range(len(table)):
+        suffix = target[idx:]
+        for prefix in word_bank:
+            target_idx = idx + len(prefix)
+            if target_idx >= len(table):
+                continue
+            if not suffix.startswith(prefix):
+                continue
+            # Following line takes the current position elements (list(str)))and target position elements (list(str))
+            # from the table, and appends current prefix to each. Then finally replaces the target items with the
+            # resulting items.
+            table[target_idx].extend([list(item) + [prefix] for item in list(table[idx])])
+
+    return table[-1]
